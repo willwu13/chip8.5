@@ -46,6 +46,7 @@ class MoviesController < ApplicationController
   # ----------------------------
   def search_tmdb
     search_terms = params[:search_terms]
+    puts "🔥 Controller received params[:search_terms] = #{search_terms.inspect}"  # Optional debug
 
     if search_terms.blank?
       flash[:warning] = "Please fill in all required fields!"

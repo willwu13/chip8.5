@@ -4,7 +4,9 @@ class Movie < ActiveRecord::Base
   require 'faraday'
 
   def self.find_in_tmdb(params)
-    api_key = 'YOUR_TMDB_API_KEY'  # Replace with real key or use ENV variable
+    puts "🔥 Movie.find_in_tmdb CALLED with: #{params.inspect}"  # Debug output
+
+    api_key = 'YOUR_TMDB_API_KEY'  # Replace with real key or ENV['TMDB_KEY']
     title = URI.encode(params[:title])
     year_query = params[:release_year].present? ? "&year=#{params[:release_year]}" : ""
     language = params[:language] || 'en'

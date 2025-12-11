@@ -20,7 +20,8 @@ describe MoviesController, type: :controller do
     it 'calls the model method that performs TMDb search' do
       allow(Movie).to receive(:find_in_tmdb).with(title: 'hardware').and_return(@fake_results)
 
-      get :search_tmdb, params: { search_terms: 'hardware' }
+      # Rails 4.2 style, no `params:` keyword
+      get :search_tmdb, search_terms: 'hardware'
 
       expect(Movie).to have_received(:find_in_tmdb).with(title: 'hardware')
     end
@@ -28,7 +29,7 @@ describe MoviesController, type: :controller do
     describe 'after valid search' do
       before :each do
         allow(Movie).to receive(:find_in_tmdb).with(title: 'hardware').and_return(@fake_results)
-        get :search_tmdb, params: { search_terms: 'hardware' }
+        get :search_tmdb, search_terms: 'hardware'
       end
 
       it 'selects the Search Results template for rendering' do
